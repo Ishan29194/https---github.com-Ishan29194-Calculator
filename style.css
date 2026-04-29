@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Code', monospace;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0d1117;
+    /* Math Graph Paper Background */
+    background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    color: #c9d1d9;
+}
+
+.calculator {
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 
+        0 0 0 1px rgba(88, 166, 255, 0.1),
+        0 20px 40px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    width: 420px;
+    position: relative;
+}
+
+/* Technical corner accents */
+.calculator::before, .calculator::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(88, 166, 255, 0.5);
+    pointer-events: none;
+}
+.calculator::before {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+}
+.calculator::after {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+}
+
+.display {
+    background: #010409;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+    text-align: right;
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    box-shadow: inset 0 2px 15px rgba(0,0,0,1), 0 0 10px rgba(88, 166, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scanline effect on display */
+.display::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+}
+
+.previous-operand {
+    color: #8b949e;
+    font-size: 1rem;
+    min-height: 24px;
+    word-wrap: break-word;
+    word-break: break-all;
+    letter-spacing: 1px;
+}
+
+.current-operand {
+    color: #58a6ff;
+    text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-top: 8px;
+    word-wrap: break-word;
+    word-break: break-all;
+    letter-spacing: 2px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.btn {
+    border: 1px solid rgba(139, 148, 158, 0.2);
+    outline: none;
+    border-radius: 8px;
+    height: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(33, 38, 45, 0.8);
+    color: #c9d1d9;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background: #30363d;
+    border-color: #8b949e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+    background: #21262d;
+}
+
+.btn-action {
+    background: rgba(248, 81, 73, 0.1);
+    color: #ff7b72;
+    border-color: rgba(248, 81, 73, 0.3);
+}
+
+.btn-action:hover {
+    background: rgba(248, 81, 73, 0.2);
+    border-color: #ff7b72;
+    box-shadow: 0 0 15px rgba(248, 81, 73, 0.3);
+}
+
+.btn-sci {
+    background: rgba(210, 168, 255, 0.1);
+    color: #d2a8ff;
+    border-color: rgba(210, 168, 255, 0.3);
+    font-size: 1rem;
+}
+
+.btn-sci:hover {
+    background: rgba(210, 168, 255, 0.2);
+    border-color: #d2a8ff;
+    box-shadow: 0 0 15px rgba(210, 168, 255, 0.3);
+}
+
+.btn-operator {
+    background: rgba(88, 166, 255, 0.1);
+    color: #58a6ff;
+    border-color: rgba(88, 166, 255, 0.3);
+}
+
+.btn-operator:hover {
+    background: rgba(88, 166, 255, 0.2);
+    border-color: #58a6ff;
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.3);
+}
+
+.btn-equals {
+    background: rgba(46, 160, 67, 0.15);
+    color: #3fb950;
+    border-color: rgba(46, 160, 67, 0.4);
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.btn-equals:hover {
+    background: rgba(46, 160, 67, 0.25);
+    border-color: #3fb950;
+    box-shadow: 0 0 20px rgba(46, 160, 67, 0.4);
+}
+
+.span-two {
+    grid-column: span 2;
+}
